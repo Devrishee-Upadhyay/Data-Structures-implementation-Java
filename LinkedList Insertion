@@ -1,0 +1,102 @@
+public class LinkedList 
+{
+	
+	Node head;
+	static class Node
+	{
+		int data;
+		Node next;
+		public Node(int data)
+		{
+			this.data=data;
+			this.next=null;
+		}
+	}
+	
+	public void push(int data)
+	{
+		if(head==null)
+		{
+			head=new Node(data);
+		    return;
+		}
+		
+		Node temp=new Node(data);
+		temp.next=head;
+		head=temp;
+	
+	}
+
+	public void append(int data)
+	{
+		Node temp=new Node(data);
+		if(head==null)
+		{
+			head=new Node(data);
+		    return;
+		}
+		
+		Node traverse=head;
+		while(traverse.next!=null)
+			traverse=traverse.next;
+		
+		traverse.next=temp;
+		
+    }
+	
+	public void insert(int data, int pos)
+	{
+		if(head==null)
+			System.out.println("LinkedList is null");
+		
+		Node temp=head;
+		int i=1;
+		while(i!=pos)
+		{
+			temp=temp.next;
+			i++;
+		}
+
+		Node temp2=temp.next;  
+		Node new_node=new Node(data);
+		temp.next=new_node;
+		new_node.next=temp2;
+			
+	}
+    
+    public void print()
+	{
+		Node temp=head;
+		while(temp!=null)
+		{
+			System.out.println(temp.data);
+			temp=temp.next;
+		}
+		
+		System.out.println("---------------------------------------");
+	}
+}
+
+
+public class LinkedListInsertion extends LinkedList
+{
+
+	public static void main(String[] args) {
+		LinkedList ll=new LinkedList();
+		ll.head=new Node(1);
+		Node second=new Node(2);
+		Node third=new Node(3);
+
+		ll.head.next=second;   // can't access head without ll as next is inside static and head is non static
+		second.next=third;
+		
+		//ll.print();	
+		
+		ll.append(4);
+		ll.push(0);
+        ll.insert(44, 3);
+		
+		ll.print();
+	}
+
+}
