@@ -1,0 +1,39 @@
+
+public class LinkedList {
+	
+	Node head;
+    static class Node
+    {
+        int data;
+        Node next;
+        public Node(int data)
+        {
+          this.data=data;
+          this.next=null;
+        }
+    }
+  }
+	
+
+public class LinkedListCreation extends LinkedList{
+
+	public static void main(String[] args) 
+	
+	{
+		LinkedList ll=new LinkedList();
+		ll.head=new Node(1);
+		Node second=new Node(2);
+		Node third=new Node(3);
+
+		ll.head.next=second;   // can't access head without ll as next is inside static and head is non static
+		second.next=third;
+		
+		Node temp=ll.head;
+		while(temp!=null)
+		{
+			System.out.println(temp.data);
+			temp=temp.next;
+		}
+	}
+
+}
