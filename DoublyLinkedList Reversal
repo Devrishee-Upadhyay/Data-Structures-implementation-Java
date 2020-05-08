@@ -1,0 +1,59 @@
+class DoublyLinkedList 
+{
+	Node head;
+	static class Node
+	{
+		int data;
+		Node next;
+		Node prev;
+		public Node(int data)
+		{
+			this.data=data;
+			this.next=null;
+			this.prev=null;
+		}
+	}
+ 
+	
+	public void append(int data)
+	{
+		Node new_node=new Node(data);
+		if(head==null)
+		{
+			head=new_node;
+			return;
+		}
+		Node temp=head;
+		while(temp.next!=null)
+		{
+			temp=temp.next;
+		}
+		temp.next=new_node;
+		new_node.prev=temp;
+	}
+}
+
+public class DLLReversal extends DoublyLinkedList{
+
+	public static void main(String[] args) {
+		DoublyLinkedList d=new DoublyLinkedList();
+		d.append(100);
+		d.append(200);
+		d.append(300);
+		d.append(400);
+		
+        d.print();
+        
+        Node prev_node=null;
+        Node current=d.head;
+
+        while(current!=null)
+        {
+        	prev_node=current.prev;
+        	current.prev=current.next;
+        	current.next=prev_node;
+        	current=current.prev;
+        }
+        d.head=prev_node.prev;
+        d.print();
+	}
