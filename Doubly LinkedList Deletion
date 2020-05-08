@@ -1,0 +1,130 @@
+
+class DoublyLinkedList 
+{
+	Node head;
+	static class Node
+	{
+		int data;
+		Node next;
+		Node prev;
+		public Node(int data)
+		{
+			this.data=data;
+			this.next=null;
+			this.prev=null;
+		}
+	}
+	
+	public void append(int data)
+	{
+		Node new_node=new Node(data);
+		if(head==null)
+		{
+			head=new_node;
+			return;
+		}
+		Node temp=head;
+		while(temp.next!=null)
+		{
+			temp=temp.next;
+		}
+		temp.next=new_node;
+		new_node.prev=temp;
+	}
+	
+	
+	public void delete(int pos)
+	{
+		Node temp=head;
+		Node prev_node=null;
+		if(head==null)
+		{
+			System.out.println("Can't delete from empty List");
+			return;
+		}
+		if(pos==1)   // to delete the first element
+		{
+			head=temp.next;
+			head.prev=null;
+			return;
+		}
+		int i=1;
+		while(temp!=null && i!=pos && temp.next!=null)
+		{
+		 prev_node=temp;
+		 temp=temp.next;
+		 i++;
+		}
+		
+		if(temp.next==null)   // to delete the last element
+		{
+			prev_node.next=null;
+			return;
+		}
+		
+		prev_node.next=temp.next;
+		temp.next.prev=prev_node;
+	}
+	
+	public void delByNode(Node del)
+	{
+		Node temp=head;
+		
+		if(head==null)
+		{
+			System.out.println("Can't delete from empty List");
+			return;
+		}
+		
+		if(del==head)
+		{
+			head=temp.next;
+			return;
+		}
+		
+		if(del.next==null)
+		{
+			del.prev.next=null;
+			return;
+		}
+		
+		del.prev.next=del.next;
+		del.next.prev=del.prev;
+			
+	}
+	public void print()
+	{
+		Node temp=head;
+		while(temp!=null)
+		{
+			System.out.println(temp.data);
+			temp=temp.next;
+		}
+		
+		System.out.println("---------------------------------------");
+	}
+}
+
+public class DLLDeletion {
+
+	public static void main(String[] args) 
+	{
+		DoublyLinkedList d=new DoublyLinkedList();
+		d.append(100);
+		d.append(200);
+		d.append(300);
+		d.append(400);
+		
+        d.print();
+        
+        d.delete(3);
+
+        d.print();
+        
+        d.append(500);
+        
+        d.delByNode(d.head.next.next);
+        
+        d.print();
+
+	}
