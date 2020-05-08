@@ -1,0 +1,93 @@
+class DoublyLinkedList 
+{
+	Node head;
+	static class Node
+	{
+		int data;
+		Node next;
+		Node prev;
+		public Node(int data)
+		{
+			this.data=data;
+			this.next=null;
+			this.prev=null;
+		}
+	}
+	
+	public void append(int data)
+	{
+		Node new_node=new Node(data);
+		if(head==null)
+		{
+			head=new_node;
+			return;
+		}
+		Node temp=head;
+		while(temp.next!=null)
+		{
+			temp=temp.next;
+		}
+		temp.next=new_node;
+		new_node.prev=temp;
+	}
+	
+	public void addBefore(int node,int val)
+	{
+		Node current=head;
+		Node temp=new Node(val);
+		Node temp_prev=null;
+		
+		if(head==null)
+		{
+			head=temp;
+			return;
+		}
+		
+		while(current!=null && current.data!=node )  //traversing till the node
+		{
+			temp_prev=current;
+			current=current.next;
+		}
+		if(current ==null)
+		{
+			System.out.println("Out of range");
+			return;
+		}
+		temp_prev.next=temp;
+		temp.next=current;
+		current.prev=temp;
+		temp.prev=temp_prev;
+}
+  
+  public void print()
+	{
+		Node temp=head;
+		while(temp!=null)
+		{
+			System.out.println(temp.data);
+			temp=temp.next;
+		}
+		
+		System.out.println("---------------------------------------");
+	}
+  
+  }
+  
+  
+  public class DLLInsertion 
+  {
+
+	public static void main(String[] args) {
+		DoublyLinkedList d=new DoublyLinkedList();
+		d.append(100);
+		d.append(200);
+		d.append(300);
+		d.append(400);
+		
+        d.print();
+        
+        d.addBefore(400, 111);  // Insert node with value 111 before node with value 400
+
+        d.print();
+
+	}
