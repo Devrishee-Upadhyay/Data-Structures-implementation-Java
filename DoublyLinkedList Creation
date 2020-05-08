@@ -57,9 +57,36 @@ class DoublyLinkedList
 		temp.next=current;
 		current.prev=temp;
 		temp.prev=temp_prev;
-}
+          }
+	  
+	  
+	  public void insertBeforeNode(Node temp,int data)
+	 {
+		Node current=temp.prev;
+		Node new_node=new Node(data);
+		
+		if(temp.prev==null)
+		{
+			new_node.next=temp;
+			temp.prev=new_node;
+			head=new_node;
+			return;
+		}
+		
+		if(temp.next==null)
+		{
+			temp.next=new_node;
+			new_node.prev=temp;
+			return;
+		}
+		
+		new_node.next=temp;
+		temp.prev=new_node;
+		new_node.prev=current;
+		new_node.prev.next=new_node;
+	}
   
-  public void print()
+        public void print()
 	{
 		Node temp=head;
 		while(temp!=null)
@@ -77,17 +104,23 @@ class DoublyLinkedList
   public class DLLInsertion 
   {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		DoublyLinkedList d=new DoublyLinkedList();
 		d.append(100);
 		d.append(200);
 		d.append(300);
 		d.append(400);
-		
-        d.print();
-        
-        d.addBefore(400, 111);  // Insert node with value 111 before node with value 400
 
-        d.print();
+		d.print();
+
+		d.addBefore(400, 111);  // Insert node with value 111 before node with value 400
+
+		d.print();
+
+		d.insertBeforeNode(d.head.next.next.next, 69);
+
+		d.print();
 
 	}
+}
