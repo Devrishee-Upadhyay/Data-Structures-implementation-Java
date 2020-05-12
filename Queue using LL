@@ -1,0 +1,79 @@
+package com.example;
+
+class QueueNode
+{
+	int data;
+	QueueNode next;
+	
+	public QueueNode(int data)
+	{
+		this.data=data;
+		next=null;
+	}
+}
+public class QueueLL 
+{
+  QueueNode front,rear;
+  
+  public QueueLL()
+  {
+	  front=rear=null;
+  }
+  
+  public void enqueue(int data)
+  {
+	  QueueNode temp=new QueueNode(data);
+	  if(rear==null)
+	  {
+		  front=rear=temp;
+		  return;
+	  }
+	  
+	  rear.next=temp;
+	  rear=temp;
+  }
+  
+  public int dequeue()
+  {
+	  if(rear==null)
+	  {
+		  System.out.println("Empty Queue");
+		  return Integer.MIN_VALUE;
+	  }
+	  QueueNode temp=front;
+	  int x=front.data;
+	  front=temp.next;
+	  
+	  return x;
+  }
+  
+  public void display()
+  {
+	  QueueNode temp=front;
+	  while(temp!=rear.next)
+	  {
+		  System.out.println(temp.data);
+		  temp=temp.next;
+	  }
+	  
+	  System.out.println("------------------");
+  }
+  
+  
+  public static void main(String[] args) 
+	{
+		QueueLL q=new QueueLL();
+		q.enqueue(10);
+		q.enqueue(20);
+		q.enqueue(30);
+		
+		q.display();
+		
+		q.dequeue();
+		
+		q.display();
+		
+		System.out.println("Front value:"+q.front.data);
+		System.out.println("Rear value:"+q.rear.data);
+	}
+}
