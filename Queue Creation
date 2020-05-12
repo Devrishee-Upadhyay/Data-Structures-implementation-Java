@@ -1,0 +1,101 @@
+class Queue 
+{
+   int size, front,rear;
+   int capacity;
+   int [] queue;
+   
+   public Queue(int capacity)
+   {
+	   this.capacity=capacity;
+	   queue=new int[capacity];
+	   //rear=capacity-1;
+	   front=rear=size=0;
+   }
+   
+   boolean isFull(Queue q)
+   {
+	   if(q.size==q.capacity)
+		   return true;
+	   
+	   return false;
+   }
+   
+   boolean isEmpty(Queue q)
+   {
+	   if(q.size==0)
+		   return true;
+	   
+	   return false;
+   }
+   
+   public void enqueue(int data)
+   {
+	   if(isFull(this))
+		   return;
+	   
+	   queue[rear]=data;
+	   rear++;
+	   size++;
+   }
+   
+   public int dequeue()
+   {
+	   if(isEmpty(this))
+		   return -1;
+	   
+	   int item=queue[front];
+	   front++;
+	   size--;
+	   
+	   return item;
+   }
+   
+   int front()
+   {
+	   if(isEmpty(this))
+		   return -1;
+	   
+	   else 
+		   return queue[front];
+   }
+   
+   int rear()
+   {
+	   if(isEmpty(this))
+		   return -1;
+	   
+	   else 
+		   return queue[rear];
+   }
+   
+   public void display()
+   {
+	   int i;
+	   for(i=front;i<rear;i++)
+	   {
+		   System.out.println(this.queue[i]);
+	   }
+	   
+	   System.out.println("-------------------");
+   }
+}
+
+
+public class QueueCreation 
+{
+	public static void main(String[] args) 
+	{
+		Queue q=new Queue(10);
+		q.enqueue(10);
+		q.enqueue(20);
+		q.enqueue(30);
+		
+		q.display();
+		
+		q.dequeue();
+		
+		q.display();
+ 
+	}
+
+}
