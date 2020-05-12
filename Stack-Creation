@@ -1,0 +1,80 @@
+class Stack 
+{
+	   final int Max_cap=1000;
+	   int top=-1;
+	   int []stack=new int[Max_cap];
+	   
+	   public void push(int val)
+	   {
+		   if(top==Max_cap-1)
+		   {
+			   System.out.println("Stack full");
+			   return;
+		   }
+		   
+		   stack[++top]=val;
+		   System.out.println(val+" Pushed into stack");
+	   }
+	   
+	   public int pop()
+	   {
+		   if(top==-1)
+		   {
+			   System.out.println("Stack empty");
+			   return 0;
+		   }
+		   
+		   return stack[top--];  // in pop() remove the top item while returning it 
+	   }
+	   
+	   public int peek()
+	   {
+		   if(top==-1)
+		   {
+			   System.out.println("Stack empty");
+			   return 0;
+		   }
+		   
+		   return stack[top];         // in peek() we do not remove the top item just return it.
+	   }
+     
+     public void print()
+	   {
+		   int x=top;
+		   if(x>=0)
+		   {
+			   System.out.println("Stack is:");
+			   while(x>=0)
+			   {
+				   System.out.println(stack[x]);
+				   x--;
+			   }
+		   }
+		   
+	   }
+
+}
+
+public class StackCreation extends Stack
+{
+   
+   public  static void main(String args[])
+   {
+	   StackCreation s=new StackCreation();
+	   
+	   s.push(5);
+	   s.push(6);
+	   s.push(8);
+	   s.push(10);
+	   
+	   System.out.println(s.pop());
+	   
+	   s.push(12);
+	   
+	   System.out.println(s.peek());
+	   
+	   s.print();
+	   
+   }
+}
+
