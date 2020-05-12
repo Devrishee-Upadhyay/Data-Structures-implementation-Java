@@ -1,0 +1,105 @@
+public class StackLL 
+{
+  StackNode root;
+  static class StackNode
+  {
+	  int data;
+	  StackNode next;
+	  public StackNode(int data)
+	  {
+		  this.data=data;
+		  this.next=null;
+	  }
+  }
+  
+  public void push(int data)
+  {
+	  StackNode temp=new StackNode(data);
+	  StackNode temp1=root;
+	  
+	  if(root==null)
+		  root=temp;
+	  else
+	  {
+		  temp.next=temp1;
+		  root=temp;
+	  }
+	  
+	  System.out.println("Data pushed in stack");
+  }
+  
+  public int pop()
+  {
+	  StackNode temp=root;
+	  if(root==null)
+	  {
+		  System.out.println("Stack is empty ");
+		  return -1;
+	  }
+	  
+	  root=temp.next;
+	  return temp.data;
+  }
+  
+  public int peek()
+  {
+	  if(root==null)
+	  {
+		  System.out.println("Stack is empty ");
+		  return -1;
+	  }
+	  
+	  return root.data;  
+  }
+  
+  public void reverseStack()
+  {
+	if(root==null)
+		System.out.println("Empty Stack");
+	
+	StackNode prev=null;
+	StackNode curr=root;
+	StackNode after;
+	
+	while(curr!=null)
+	{
+		after=curr.next;
+		curr.next=prev;
+		prev=curr;
+		curr=after;
+	}
+	
+	root=prev;
+  }
+  
+  public void display()
+  {
+	  StackNode temp=root;
+	  while(temp!=null)
+	  {
+		  System.out.println(temp.data);
+		  temp=temp.next;
+	  }
+	  
+	  System.out.println("--------------------");
+  }
+  
+  public static void main(String[] args)
+  {
+	  StackLL stack=new StackLL();
+	  stack.root=new StackNode(100);
+	  stack.push(200);
+	  stack.push(300);
+	  stack.push(400);
+	  
+	  stack.display();
+	  
+	  int top=stack.pop();
+	  System.out.println("Popping the top of stack:"+top);
+	  
+	  stack.reverseStack();
+	  stack.display();
+	  
+  } 
+  
+}
