@@ -1,0 +1,95 @@
+public class PriorityQueueLL 
+{
+	Node head;
+	static class Node
+	{
+		int data;
+		int priority;
+		Node next;
+		
+		public Node(int data,int priority)
+		{
+			this.data=data;
+			this.next=null;
+			this.priority=priority;
+		}
+	}
+
+	public void push(int data, int p)
+	{
+		if(head==null)
+		{
+			head=new Node(data,p);
+			return;
+		}
+		
+		Node new_node=new Node(data,p);
+		Node prev=null;
+		Node curr=head;
+		if(head.next==null)
+		{
+			if(p>head.priority)
+			{
+				new_node.next=head;
+				head=new_node;
+				return;
+			}
+			else
+			{
+				head.next=new_node;
+				return;
+			}			    
+		}
+		
+		while(curr!=null && p<curr.priority)
+		{
+			prev=curr;
+			curr=curr.next;
+		}
+		
+		prev.next=new_node;
+		new_node.next=curr;	
+		
+	}
+	
+	public int poll()
+	{
+		Node temp=head;
+		head=head.next;
+		return temp.data;
+	}
+	
+	public int peek()
+	{
+		return head.data;
+	}
+	
+	public void display()
+	{
+		Node temp=head;
+		while(temp!=null)
+		{
+			System.out.println("Priority:"+temp.priority+" Data:"+temp.data);
+			temp=temp.next;
+		}
+		System.out.println("---------------------------");
+	}
+	
+	
+	public static void main(String[] args) 
+	{
+	  PriorityQueueLL pq=new PriorityQueueLL();
+	  pq.push(100,5);
+	  pq.push(150,2);
+	  pq.push(171, 3);
+	  pq.push(200, 1);
+	
+	  pq.display();
+	  
+	  System.out.println("Polled value:"+pq.poll());
+	  
+	  pq.display();
+
+	}
+
+}
